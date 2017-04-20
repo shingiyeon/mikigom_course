@@ -1,0 +1,42 @@
+\begin{thebibliography}{1}
+
+\bibitem{aheui}
+{Aheui}.
+\newblock \url{https://aheui.github.io}, 2012 (accessed April 10, 2017).
+
+\bibitem{aheui_projects}
+{Aheui working group - git}.
+\newblock \url{https://github.com/aheui}, 2012 (accessed April 10, 2017).
+
+\bibitem{avis}
+{AVIS}.
+\newblock \url{https://aheui.github.io/avis}, 2014 (accessed April 10, 2017).
+
+\bibitem{aheuiaheui}
+{aheui.aheui}.
+\newblock \url{https://github.com/aheui/aheui.aheui}, 2015 (accessed April 10,
+  2017).
+
+\bibitem{aheuichem}
+{AheuiChem}.
+\newblock \url{http://yoo2001818.github.io/AheuiChem}, 2015 (accessed April 10,
+  2017).
+
+\bibitem{aaby2003compiler}
+Anthony~A Aaby.
+\newblock Compiler construction using flex and bison.
+\newblock 2003.
+
+\bibitem{lattner2004llvm}
+Chris Lattner and Vikram Adve.
+\newblock Llvm: A compilation framework for lifelong program analysis \&
+  transformation.
+\newblock In {\em Proceedings of the international symposium on Code generation
+  and optimization: feedback-directed and runtime optimization}, page~75. IEEE
+  Computer Society, 2004.
+
+\bibitem{lesk1975lex}
+Michael~E Lesk and Eric Schmidt.
+\newblock {Lex: A lexical analyzer generator}, 1975.
+
+\end{thebibliography}

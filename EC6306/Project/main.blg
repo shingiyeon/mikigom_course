@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: refs.bib
+Warning--to sort, need author or key in aheui
+Warning--to sort, need author or key in aheui_projects
+Warning--to sort, need author or key in avis
+Warning--to sort, need author or key in aheuichem
+Warning--to sort, need author or key in aheuiaheui
+Warning--empty journal in aaby2003compiler
+You've used 8 entries,
+            2118 wiz_defined-function locations,
+            530 strings with 4791 characters,
+and the built_in function-call counts, 1617 in all, are:
+= -- 154
+> -- 38
+< -- 1
++ -- 18
+- -- 10
+* -- 67
+:= -- 228
+add.period$ -- 19
+call.type$ -- 8
+change.case$ -- 29
+chr.to.int$ -- 0
+cite$ -- 14
+duplicate$ -- 71
+empty$ -- 186
+format.name$ -- 10
+if$ -- 378
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 2
+newline$ -- 37
+num.names$ -- 6
+pop$ -- 65
+preamble$ -- 1
+purify$ -- 21
+quote$ -- 0
+skip$ -- 63
+stack$ -- 0
+substring$ -- 44
+swap$ -- 13
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 32
+warning$ -- 6
+while$ -- 7
+width$ -- 9
+write$ -- 71
+(There were 6 warnings)

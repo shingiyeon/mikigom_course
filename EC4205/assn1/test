@@ -1,0 +1,1 @@
+who | grep hjnam || echo "hjnam not logged in"

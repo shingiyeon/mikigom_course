@@ -1,0 +1,78 @@
+Rules					IA32 in GAS
+
+R1. s -> r
+
+R2. r -> TEMP(v)
+
+R3. r -> M_PLUS(r, r)			mov $r1, $r3
+					add $r2, $r3
+
+R4. r -> M_MINUS(r, r)			mov $r1, $r3
+					sub $r2, $r3
+
+R5. r -> M_CONST(i)			mov i, $r1
+
+R6. r -> M_MEM(r)			mov 0($r1), $r2			
+
+R7. r -> M_CALL(fname, r, ... ,r))	push $rn
+					push $rn-1
+					.
+					.
+					.
+					push $rk
+					call fname
+					add 4*n, %esp
+
+R8. r -> M_NE(r, r)			mov 1, $r3
+					cmp $r2, $r1
+					jne .L0
+					mov 0, $r3
+					.L0
+
+R9. r -> M_EQ(r, r)			mov 1, $r3
+					cmp $r2, $r1
+					je .L0
+					mov 0, $r3
+					.L0
+
+R10. r -> M_GT(r, r)			mov 1, $r3
+					cmp $r2, $r1
+					jg .L0
+					mov 0, $r3
+					.L0
+
+R11. r -> M_PLUS(r, M_CONST(i))
+
+R12. r -> M_MEM(M_PLUS(r, M_CONST(i)))	mov 0($r2), $r1
+
+R13. r-> M_NE(				mov 0($r2), $r1
+	M_MEM(M_PLUS(r, M_CONST(i))),	mov 1, $r3
+	 M_MEM(M_PLUS(r, M_CONST(i))))	cmp $r1, 0($r2)
+					jne .L0
+					mov 0, $r3
+					.L0
+
+R13. r-> M_EQ(				mov 0($r2), $r1
+	M_MEM(M_PLUS(r, M_CONST(i))),	mov 1, $r3
+	 M_MEM(M_PLUS(r, M_CONST(i))))	cmp $r1, 0($r2)
+					je .L0
+					mov 0, $r3
+					.L0
+
+R13. r-> M_GT(				mov 0($r2), $r1
+	M_MEM(M_PLUS(r, M_CONST(i))),	mov 1, $r3
+	 M_MEM(M_PLUS(r, M_CONST(i))))	cmp $r1, 0($r2)
+					jg .L0
+					mov 0, $r3
+					.L0
+
+R14. s -> M_MOVE(			mov $r2, 0($r1)
+	M_MEM(M_PLUS
+	(r, M_CONST(i))),
+	M_CALL(fname, M_CONST, M_CONST))
+
+R15. s -> M_MOVE(			mov $r2, 0($r1)
+	M_MEM(M_PLUS(r, M_CONST(i)),	sub $r3, 0($r4)
+	M_MINUS(
+	M_MEM(M_PLUS(r, M_CONST(i)),
+	M_MEM(M_PLUS(R, M_CONST(i)))))))

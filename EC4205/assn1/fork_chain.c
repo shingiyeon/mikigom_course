@@ -3,11 +3,12 @@
 #include <unistd.h>
 #include "comm2block.c"
 #include "print_block.c"
+#include "symbols.c"
 
-int block_num = 0;
+//int block_num = 0;
 int counter = 0;
-Command* blocks;
-
+//Command* blocks;
+/*
 void child_func() {
     pid_t pid;
     if (counter < block_num) {
@@ -33,22 +34,22 @@ void child_func() {
             exit(0);
         }
     }
-}
+}*/
 
 int main(void) 
 {
-	blocks = comm2block(&block_num);
-	//print_blocks(blocks, block_num);
-
-    pid_t pid;
-    pid = fork();
-    if (pid < 0) {
-        printf("Fork failed %d\n", counter);
-        return -1;
+    while(1){
+        Command* blocks;
+        int block_num;
+        print_prompt();
+        blocks = comm2block(&block_num);
+        if(feof(stdin)){
+            printf("Ctrl+D exit\n");
+            exit(0);
+        }
+        fflush(stdin);
+        get_cmd(blocks, block_num);
+        free(blocks);
     }
-    if (pid == 0) 
-        child_func();
-    else
-        wait(&pid);
     return 0;
 }

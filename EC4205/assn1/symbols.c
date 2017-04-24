@@ -45,21 +45,27 @@ void execute_redirect(Command* blocks,int block_num, int start_b, int final_b){
     for( i = start_b; i <= final_b; i++){
         if( strcmp(blocks[i].optype, "<") == 0){
             //printf(" < %d %s\n",i,blocks[i].commfile[0]);
-            if( (fd = open( blocks[i].commfile[0], O_RDONLY, 0644)) < 0)
+            if( (fd = open( blocks[i].commfile[0], O_RDONLY, 0644)) < 0){
                  perror("file open error");
+                 exit(1);
+            }     
             dup2(fd, 0);
             close(fd);
         }
         else if( strcmp(blocks[i].optype, ">") == 0){
             //printf(" > %d %s\n",i,blocks[i].commfile[0]);
-            if( (fd = open( blocks[i].commfile[0], O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+            if( (fd = open( blocks[i].commfile[0], O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0){
                  perror("file open error");
+                 exit(1);
+            }
             dup2(fd, 1);
             close(fd);
         }
         else if( strcmp(blocks[i].optype, ">>") == 0){
-            if( (fd = open( blocks[i].commfile[0], O_WRONLY | O_CREAT | O_APPEND, 0644)) < 0)
+            if( (fd = open( blocks[i].commfile[0], O_WRONLY | O_CREAT | O_APPEND, 0644)) < 0){
                  perror("file open error");
+                 exit(1);
+            }
             dup2(fd, 1);
             close(fd);
         }

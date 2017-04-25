@@ -87,9 +87,18 @@ char* str_replace(char *orig, char *rep, char *with) {
 // OUT : len(int*) - length of arr of string
 // RETURN : dynamic allocated arr of string
 char** _strtok_by_space(char* str, int* len){
+	//printf("%s\n", str);
+	char* original_str = malloc(sizeof(char) * strlen(str));
+	//strcpy(original_str, str);
+	original_str = str;
+//	printf("%s\n", original_str);
     char*  p    = strtok(str, " ");
     int n_spaces = 0;
     char** res = NULL;
+	int swit = 0, queto_count = 0;
+	int i;
+
+	char* temp, * temp_;
 
     /* split string and append tokens to 'res' */
     while (p) {
@@ -98,14 +107,27 @@ char** _strtok_by_space(char* str, int* len){
         if (res == NULL)
             exit(-1); /* memory allocation failed */
 
-        res[n_spaces-1] = p;
+		res[n_spaces-1] = p;
+		/*
+		if(swit == 1){
+			for(i = 0; i < queto_count; ++i){
+				printf("!!!!!!!!!!!\n");
+				p = strtok(original_str, "\"");
+				p = strtok(NULL, "\"");
+				p = str + (original_str - p);
+			}
+			swit = 0;
+		}
+		*/
 
-        p = strtok(NULL, " ");
-    }
+		if(p != NULL){
+			p = strtok(NULL, " ");
+		}
+	}
 
-    /* realloc one extra element for the last NULL */
-    res = realloc(res, sizeof (char*) * (n_spaces+1));
-    res[n_spaces] = 0;
+	/* realloc one extra element for the last NULL */
+	res = realloc(res, sizeof (char*) * (n_spaces + 1));
+	res[n_spaces] = 0;
 
     *len = n_spaces;
     return res;

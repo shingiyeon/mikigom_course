@@ -12,13 +12,8 @@ Command* comm2block(int* bn){
 	char* str;
 	int token_num, i;
 	str = _getln();
-
 	char** tokens = _strtok_by_space(str, &token_num);
-	/*
-	for(i = 0; i < token_num; ++i){
-		printf("%s\n", tokens[i]);
-	}
-	*/
+
 
 	int pipe_count = 0;
 	for(i = 0; i < token_num; ++i){
@@ -33,6 +28,36 @@ Command* comm2block(int* bn){
 		}
 	}
 
+	int queto_switch = 0;
+	int start_index;
+	int j;
+	for(i = 0; i < token_num; ++i){
+		if(tokens[i][0] == '\"' && tokens[i][strlen(tokens[i]) - 1] != '\"'){
+			queto_switch = 1;
+			start_index = i;
+		}
+		else if(tokens[i][0] != '\"'  && tokens[i][strlen(tokens[i]) - 1] == '\"'){
+			for(j = token_num - 1; j > i ;--j){
+			//	tokens[j] = (char *) realloc(tokens[j], sizeof(char) * (strlen(tokens[j]) + 1));
+			//	strcat(tokens[j], " ");
+			//	tokens[j] = tokens[j] + sizeof(char);
+			}
+			char * tmp = malloc(sizeof(char) * (strlen(tokens[i]) + 1));
+			strcpy(tmp, tokens[i]);
+			strcat(tokens[start_index], " ");
+			strcat(tokens[start_index], tmp);
+			tokens[i] = "";
+			queto_switch = 0;
+		}
+		else if(queto_switch == 1){
+			char * tmp = malloc(sizeof(char) * (strlen(tokens[i]) + 1));
+			strcpy(tmp, tokens[i]);
+			strcat(tokens[start_index], " ");
+			strcat(tokens[start_index], tmp);
+			tokens[i] = "";
+		}
+	}
+
 	int args_count = 0;
 	int args_number_by_block[pipe_count+1];
 	pipe_count = 0;
@@ -43,13 +68,15 @@ Command* comm2block(int* bn){
 		   strcmp(tokens[i], "|") == 0 ||
 		   strcmp(tokens[i], "&&") == 0 ||
 		   strcmp(tokens[i], "||") == 0 ||
-		   strcmp(tokens[i], ";") == 0 ){
+		   strcmp(tokens[i], ";") == 0){
 			args_number_by_block[pipe_count] = args_count;
 			pipe_count += 1;
 			args_count = 0;
 		}
-		else
-			args_count += 1;
+		else{
+			if(strcmp(tokens[i], "") != 0)
+				args_count += 1;
+		}
 	}
 	args_number_by_block[pipe_count] = args_count;
 
@@ -137,6 +164,7 @@ Command* comm2block(int* bn){
 		com_block[i].commfile = command_block_string[i];
 		com_block[i].optype = command_ops[i];
 		com_block[i].commfile_len = args_number_by_block[i];
+                com_block[i].commfile[ com_block[i].commfile_len] = '\0';
 	}
 
 	*bn = pipe_count + 1;
